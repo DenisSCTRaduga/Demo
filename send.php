@@ -2,8 +2,6 @@
     $tovar = $_POST['tovar'];
     $name = $_POST['name'];        
     $message = $_POST['message'];  
-    $name = htmlspecialchars($name);
-    $message = htmlspecialchars($message);
     $name = urldecode($name);
     $message = urldecode($message);
     $name = trim($name);
@@ -16,7 +14,8 @@ if (empty($name) == FALSE or empty($message) == FALSE) {
       echo "<a href=index.php>Ввернуться на главную</a>";
       $mysqli = new mysqli("localhost", "root", "", "test");
       $mysqli->query("SET NAMES 'utf8'");
-      $mysqli->query("INSERT INTO `zakaz`(`tovar`, `name`, `message`) VALUES ('$tovar', '$name', '$message')");        
+      $mysqli->query("INSERT INTO `zakaz`(`tovar`, `name`, `message`, `order_state`) "
+              . "VALUES ('$tovar', '$name', '$message', 'Не доставлен')");        
       $mysqli->close();
     }
 }
